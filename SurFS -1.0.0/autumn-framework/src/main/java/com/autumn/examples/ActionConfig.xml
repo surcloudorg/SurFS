@@ -1,0 +1,121 @@
+<!--部署autopage
+在新创建的目录（demo）下添加action
+在页面控制器里配置控制器
+与之前框架里添加action方法完全一样,ActionID表示访问的servelet，如：autopage
+只需要把类名称指定为com.autumn.core.autopage.AutoAction
+并在配置里添加autoaction的配置
+这样就可以用上 框架的权限控制和自动菜单显示机制
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+action属性必须设置3个参数, 
+datasource=" SystemSource",系统连接池名
+table="demo",要访问的表名
+primarykey="id" 表主健,这个字段现在可以是任何类型,但不支持多字段组合主健,更新操作现在可以更新主健, 
+-->
+
+<action datasource="SystemSource" table="demo" primarykey="id">
+    
+<!--field 节点
+在这里可以配置各个字段属性,也可以不配置,JDBC可以获取到字段的大部分属性, 
+如果需要某个字段使用下拉列表,或者页面显示记录需要替换某些值(如:true替换为正确)时,那就需要配置该字段
+         <item key="0" value="${ icon:../img/pub/fujian.gif}男"/>
+         <item key="1" value="${ icon:../img/pub/icoblue.gif}女"/>
+	 <item key="${empty}" value="${ icon:../img/pub/none.gif}未知"/>
+key里面仅可以包含${empty}变量,表示是null值或空字符串
+value里面仅可以包含图标变量,${ icon:../img/pub/fujian.gif}指定图片路径,这样页面记录可以显示出一个图标
+可以查询某个表来填充对照表,<item key="${f1}" value="${f2}" sql="select '1' as f1,'女' as f2."/> 
+field可选包含下面属性
+comment,字段描述，在页面编辑该字段显示的注释，默认=字段名
+注释和默认值JDBC是获取不了的，只能通过查询数据库的系统表来获取，
+不过不同数据库系统表都不一样，况且当前连接可能没有访问系统表的权限，所以字段注释需要在这里指定
+fullname,这在多表联合查询时，如果有另一个表的字段需要作为查询条件，就必须配置该字段的fullname,如：table2.field
+    -->
+    <field name="name" comment="姓名"/>
+    <field name="sex" comment="性别">
+        <item key="0" value="${icon:/img/pub/fujian.gif}男"/>
+        <item key="1" value="${icon:/img/pub/icoblue.gif}女"/>
+    </field>
+<!--query节点
+caption:搜索按钮，默认=“搜索”， 
+allowjump：分页形式，true：可以跳页，false：只能前后翻页，不填这个属性,不提供分页功能
+pagesize：每页显示多少行，默认=20
+sql:可以不设置，如果设置param
+        <param name="sex"/>
+        <param name="name" relation="like"/>//只能like,between,equals属性值
+        <param name="loginid"/>,如果查询条件中包含关联的其他表字段，必须在上面的Field里配置该字段，并包含fullname属性
+这样sql=select * from table where sex=? and name like '%?%'，如果字段值为空，不加对应查询条件
+sql可以设置为
+select * from table where loginid=${loginuser.id}
+这里可包含三种变量，
+loginuser,登陆用户信息com.autumn.core.web.LoginUser
+action,当前action信息, com.autumn.core.web.Action
+webcfg，当前目录信息，com.autumn.core.web.WebDirectory
+注意: 这三种变量在query,insert,update,delete的sql属性里可以包含 在column 的text，link属性里可以包含，其他地方不能包含
+显示列的配置
+变量${col}表示 ${查询出的记录集列名}
+caption:列头，必须设置，默认空
+align："center/left/right" 默认 left
+width：15,表示15%
+link:显示为一个连接，如${action.config_ActionId}.update.do?id=${id}，可能是autotest.update.do?id=1，
+check:在前面显示复选框，用来选中删除
+orderfield="id",这样在此列的列头会出现一个排序按钮, 
+order="asc",如果同时设置这个属性,表示开始查询时默认以id asc来排序
+    -->
+    <query caption="搜索" order="desc" pagesize="10" allowjump="true">
+        <param name="sex"/>
+        <param name="name" relation="like"/>
+        
+        <column text="${id}" caption="id" align ="center" orderfield="id" order="desc" />
+        <column text="${name}" caption="姓名" width="50" align ="left" link="${action.actionName}.update.do?id=${id}" orderfield="name"/>
+        <column text="${sex}" caption="性别" width="15" align ="center"/>
+        <column text="${age}" caption="年龄" width="15" align ="center"/>
+        <column text="选中" caption="全选" width="10" align ="center" check="true"/>
+    </query>
+<!-- insert:没有此项，不提供添加功能
+caption:添加按钮，默认=“添加”， 
+sql:可以不设置，如果设置param
+        <param name="name" default="zhangsan"/>
+        <param name="sex" default="1" readonly="true"/>
+        <param name="age" hiden="true" default="23"/>//隐藏
+相当于这样 insert table(name,sex,age)values(?,1,23) 
+如果设置sql为
+insert table(name,sex)values(${name},${sex})
+这样param里设置的只有name和sex有效,param也可以不设置
+    -->
+    <insert caption="添加">
+        <param name="name" default="zhangsan"/>
+        <param name="sex" default="1"/>
+        <param name="age" hiden="true" default="23"/>
+    </insert>
+<!--update:没有此项，不提供修改功能
+caption:修改按钮，默认=“修改”， 
+sql:可以不设置，如果设置param
+        <param name="name"/>//这里设置default无效
+        <param name="sex"/>
+        <param name="age" readonly="true"/>//更新会忽略但可以显示到页面上
+        <param name="id" hiden="true"/>//这是主健，可以不设置，没有自动会加上
+        其他字段如果设置为hiden，readonly，更新会忽略该字段
+相当于update table set name=? ,sex=? where id=?
+如果设置了sql
+update table set name=${name},age=${age} where id=${old.id} and loginid=${loginuser.id}
+可以使用loginuser变量，条件语句中必须包含主健${old.id}，否则抛出错误
+        <param name="name"/>//这里设置default无效
+        <param name="sex"/>//语句中没有sex，在更新页面显示此字段，但是只读的
+        <param name="age" readonly="true"/>//更新会忽略但可以显示到页面上
+        <param name="id" hiden="true"/>//这是主键,可以不设,但sql中必须有${old.id}条件
+    -->
+    <update caption="修改">
+        <param name="name" default="刘社朋"/>
+        <param name="sex" readonly="true"/>
+        <param name="age" default="0"/>
+    </update>
+<!--delete:没有此项，不提供删除功能
+caption:删除按钮，默认=“删除”， 
+sql:可以不设置 ，默认=delete table where id in(...)
+可以设为：delete table where id in(${id}) and  loginid=${loginuser.id}
+必须包含${id，否则抛出错误
+    -->
+    <delete caption="删除选中"/>
+</action>

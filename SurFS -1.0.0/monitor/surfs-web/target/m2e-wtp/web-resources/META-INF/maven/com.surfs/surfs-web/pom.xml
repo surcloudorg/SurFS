@@ -1,0 +1,234 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.surfs</groupId>
+	<artifactId>surfs-web</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>surfs-web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<url>http://10.0.0.9:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+		<repository>
+			<id>nexus-releases</id>
+			<url>http://10.0.0.9:8081/nexus/content/repositories/releases/</url>
+		</repository>
+	</distributionManagement>
+
+	<properties>
+		<!-- jdk compiler version -->
+		<project-compiler.version>1.7</project-compiler.version>
+		<project-build.sourceEncoding>UTF-8</project-build.sourceEncoding>
+		
+		<!-- surfs version -->
+		<!-- <surfs-nas.version>2.0-SNAPSHOT</surfs-nas.version> -->
+		<surfs-user.version>0.0.1-SNAPSHOT</surfs-user.version>
+		<surfs-monitor.version>0.0.1-SNAPSHOT</surfs-monitor.version>
+		<surfs-block.version>0.0.1-SNAPSHOT</surfs-block.version>
+		
+		<!-- riak version -->
+		<riak_client_version>1.1.4</riak_client_version>
+		<riak_protobuf_version>1.2.1</riak_protobuf_version>
+		
+		<!-- json version -->
+		<json_lib_version>2.4</json_lib_version>
+		
+		<!-- jdom version -->
+		<jdom.version>1.0</jdom.version>
+		
+		<!-- xfire version -->
+		<xfire-all.version>1.2.6</xfire-all.version>
+		
+		<!-- mina version -->
+		<mina-core.version>2.0.7</mina-core.version>
+		
+		<!-- derby version -->
+		<derby.version>10.9.1.0</derby.version>
+		
+		<!-- servlet version -->
+		<javax_servlet_api_version>3.0.1</javax_servlet_api_version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- json libs -->
+			<dependency>
+				<groupId>net.sf.json-lib</groupId>
+				<artifactId>json-lib</artifactId>
+				<version>${json_lib_version}</version>
+				<classifier>jdk15</classifier>
+			</dependency>
+			<!-- surfs-nas libs -->
+			<!-- <dependency>
+				<groupId>surfs-nas</groupId>
+				<artifactId>surfs-nas</artifactId>
+				<version>${surfs-nas.version}</version>
+			</dependency> -->
+			<dependency>
+				<groupId>com.surfs</groupId>
+				<artifactId>surfs-user</artifactId>
+				<version>${surfs-user.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.surfs</groupId>
+				<artifactId>surfs-monitor</artifactId>
+				<version>${surfs-monitor.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.surfs</groupId>
+				<artifactId>surfs-block</artifactId>
+				<version>${surfs-block.version}</version>
+			</dependency>
+			<!-- riak libs -->
+			<dependency>
+				<groupId>com.basho.riak</groupId>
+				<artifactId>riak-client</artifactId>
+				<version>${riak_client_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.basho.riak.protobuf</groupId>
+				<artifactId>riak-pb</artifactId>
+				<version>${riak_protobuf_version}</version>
+			</dependency>
+			<!-- jdom libs -->
+			<dependency>
+				<groupId>jdom</groupId>
+				<artifactId>jdom</artifactId>
+				<version>${jdom.version}</version>
+			</dependency>
+			<!-- xfire libs -->
+			<dependency>
+				<groupId>org.codehaus.xfire</groupId>
+				<artifactId>xfire-all</artifactId>
+				<version>${xfire-all.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- mina libs -->
+			<dependency>
+				<groupId>org.apache.mina</groupId>
+				<artifactId>mina-core</artifactId>
+				<version>${mina-core.version}</version>
+			</dependency>
+			<!-- derby libs -->
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derby</artifactId>
+				<version>${derby.version}</version>
+			</dependency>
+			<!-- servlet libs -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${javax_servlet_api_version}</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- json libs -->
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<classifier>jdk15</classifier>
+		</dependency>
+		<!-- surfs-nas libs -->
+		<!-- <dependency>
+			<groupId>surfs-nas</groupId>
+			<artifactId>surfs-nas</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>servlet-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.el</groupId>
+					<artifactId>el-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>jsp-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>tomcat</groupId>
+					<artifactId>jasper-compiler</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>tomcat</groupId>
+					<artifactId>jasper-runtime</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> -->
+		<!-- surfs-user libs -->
+		<dependency>
+			<groupId>com.surfs</groupId>
+			<artifactId>surfs-user</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.surfs</groupId>
+			<artifactId>surfs-monitor</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.surfs</groupId>
+			<artifactId>surfs-block</artifactId>
+		</dependency>
+		<!-- riak libs -->
+		<dependency>
+			<groupId>com.basho.riak</groupId>
+			<artifactId>riak-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.basho.riak.protobuf</groupId>
+			<artifactId>riak-pb</artifactId>
+		</dependency>
+		<!-- jdom libs -->
+		<dependency>
+			<groupId>jdom</groupId>
+			<artifactId>jdom</artifactId>
+		</dependency>
+		<!-- xfire libs -->
+		<dependency>
+			<groupId>org.codehaus.xfire</groupId>
+			<artifactId>xfire-all</artifactId>
+		</dependency>
+		<!-- mina libs -->
+		<dependency>
+			<groupId>org.apache.mina</groupId>
+			<artifactId>mina-core</artifactId>
+		</dependency>
+		<!-- derby libs -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+		</dependency>
+		<!-- servlet libs -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>ROOT</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${project-compiler.version}</source>
+					<target>${project-compiler.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

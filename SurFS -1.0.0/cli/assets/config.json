@@ -1,0 +1,8 @@
+{
+    "entryPoint": "http://10.0.76.10:8080", 
+    "debug": false, 
+    "logfile": "/var/log/surfs.log", 
+    "proxy": "", 
+    "timeout": 0, 
+    "workDir": "/etc/surfs/"
+}

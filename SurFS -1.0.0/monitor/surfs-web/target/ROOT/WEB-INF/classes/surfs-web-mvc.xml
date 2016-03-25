@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="com.surfs.storage.web.controller"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" />
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/plain;charset=UTF-8</value>
+						<value>*/*;charset=UTF-8</value>
+						<value>application/json</value>
+					</list>
+				</property>
+				<property name="writeAcceptCharset" value="false" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!-- <bean class="com.surdoc.mobilephone.exception.handler.ControllerExceptionHandler">
+	</bean> -->
+
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/saveGlobleProperties.do"/>
+			<bean class="com.surfs.storage.web.interceptors.GlobleConvertInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
+	<!-- <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="10" />
+	</bean> -->
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="0" />
+	</bean>
+	
+	<!-- <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	    <property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView"/>
+	    <property name="order" value="1" />
+    </bean> -->
+	
+	<!-- <bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="zh_CN" />
+	</bean> -->
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:users</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="cacheSeconds">
+			<value>3600</value>
+		</property>
+	</bean>
+
+	<!-- <bean id="exceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.Exception">error</prop>
+				<prop key="java.lang.Throwable">error</prop>
+			</props>
+		</property>
+		<property name="statusCodes">
+			<props>
+				<prop key="error">403</prop>
+				<prop key="error">404</prop>
+				<prop key="error">405</prop>
+				<prop key="error">500</prop>
+			</props>
+		</property>
+		<property name="warnLogCategory" value="WARN"></property>
+		<property name="defaultErrorView" value="error"></property>
+		<property name="defaultStatusCode" value="500"></property>
+	</bean> -->
+	
+	<mvc:view-controller path="/login.jsp" view-name="login" />
+	<mvc:view-controller path="/showDiskLog.do" view-name="monitor/disk" />
+	<!-- <mvc:view-controller path="/globle.jsp" view-name="globle" />
+	<mvc:view-controller path="/volume.jsp" view-name="volume" />
+	<mvc:view-controller path="/node.jsp" view-name="node" />
+	<mvc:view-controller path="/charts.jsp" view-name="charts" /> -->
+	
+	<!-- <mvc:resources location="/WEB-INF/css/" mapping="/css/*" />
+	<mvc:resources location="/WEB-INF/js/" mapping="/js/*" />
+	<mvc:resources location="/WEB-INF/img/" mapping="/img/*" />
+	<mvc:resources location="/WEB-INF/images/" mapping="/images/*" />
+	<mvc:resources location="/WEB-INF/font-awesome/" mapping="/font-awesome/*" /> -->
+	
+
+</beans>

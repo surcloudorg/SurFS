@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <maxline comment="内存最大行数">100</maxline>
+  <filemaxsize comment="缓存文件最大长度">1024*1024*512</filemaxsize>
+  <blocksize comment="数据最大不能超">1024*1024*5</blocksize>
+  <buffer comment="队列信息" method="true"></buffer>
+</config>

@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SurFS-CLI-Manual-en</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+<style type="text/css">
+.highlight  { background: #ffffff; }
+.highlight .c { color: #999988; font-style: italic } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .k { font-weight: bold } /* Keyword */
+.highlight .o { font-weight: bold } /* Operator */
+.highlight .cm { color: #999988; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #999999; font-weight: bold } /* Comment.Preproc */
+.highlight .c1 { color: #999988; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #999999; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .gd .x { color: #000000; background-color: #ffaaaa } /* Generic.Deleted.Specific */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #999999 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .gi .x { color: #000000; background-color: #aaffaa } /* Generic.Inserted.Specific */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #aaaaaa } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { font-weight: bold } /* Keyword.Constant */
+.highlight .kd { font-weight: bold } /* Keyword.Declaration */
+.highlight .kp { font-weight: bold } /* Keyword.Pseudo */
+.highlight .kr { font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #445588; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #009999 } /* Literal.Number */
+.highlight .s { color: #d14 } /* Literal.String */
+.highlight .na { color: #008080 } /* Name.Attribute */
+.highlight .nb { color: #0086B3 } /* Name.Builtin */
+.highlight .nc { color: #445588; font-weight: bold } /* Name.Class */
+.highlight .no { color: #008080 } /* Name.Constant */
+.highlight .ni { color: #800080 } /* Name.Entity */
+.highlight .ne { color: #990000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #990000; font-weight: bold } /* Name.Function */
+.highlight .nn { color: #555555 } /* Name.Namespace */
+.highlight .nt { color: #000080 } /* Name.Tag */
+.highlight .nv { color: #008080 } /* Name.Variable */
+.highlight .ow { font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #009999 } /* Literal.Number.Float */
+.highlight .mh { color: #009999 } /* Literal.Number.Hex */
+.highlight .mi { color: #009999 } /* Literal.Number.Integer */
+.highlight .mo { color: #009999 } /* Literal.Number.Oct */
+.highlight .sb { color: #d14 } /* Literal.String.Backtick */
+.highlight .sc { color: #d14 } /* Literal.String.Char */
+.highlight .sd { color: #d14 } /* Literal.String.Doc */
+.highlight .s2 { color: #d14 } /* Literal.String.Double */
+.highlight .se { color: #d14 } /* Literal.String.Escape */
+.highlight .sh { color: #d14 } /* Literal.String.Heredoc */
+.highlight .si { color: #d14 } /* Literal.String.Interpol */
+.highlight .sx { color: #d14 } /* Literal.String.Other */
+.highlight .sr { color: #009926 } /* Literal.String.Regex */
+.highlight .s1 { color: #d14 } /* Literal.String.Single */
+.highlight .ss { color: #990073 } /* Literal.String.Symbol */
+.highlight .bp { color: #999999 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #008080 } /* Name.Variable.Class */
+.highlight .vg { color: #008080 } /* Name.Variable.Global */
+.highlight .vi { color: #008080 } /* Name.Variable.Instance */
+.highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
+.pl-c {
+    color: #969896;
+}
+
+.pl-c1,.pl-mdh,.pl-mm,.pl-mp,.pl-mr,.pl-s1 .pl-v,.pl-s3,.pl-sc,.pl-sv {
+    color: #0086b3;
+}
+
+.pl-e,.pl-en {
+    color: #795da3;
+}
+
+.pl-s1 .pl-s2,.pl-smi,.pl-smp,.pl-stj,.pl-vo,.pl-vpf {
+    color: #333;
+}
+
+.pl-ent {
+    color: #63a35c;
+}
+
+.pl-k,.pl-s,.pl-st {
+    color: #a71d5d;
+}
+
+.pl-pds,.pl-s1,.pl-s1 .pl-pse .pl-s2,.pl-sr,.pl-sr .pl-cce,.pl-sr .pl-sra,.pl-sr .pl-sre,.pl-src,.pl-v {
+    color: #df5000;
+}
+
+.pl-id {
+    color: #b52a1d;
+}
+
+.pl-ii {
+    background-color: #b52a1d;
+    color: #f8f8f8;
+}
+
+.pl-sr .pl-cce {
+    color: #63a35c;
+    font-weight: bold;
+}
+
+.pl-ml {
+    color: #693a17;
+}
+
+.pl-mh,.pl-mh .pl-en,.pl-ms {
+    color: #1d3e81;
+    font-weight: bold;
+}
+
+.pl-mq {
+    color: #008080;
+}
+
+.pl-mi {
+    color: #333;
+    font-style: italic;
+}
+
+.pl-mb {
+    color: #333;
+    font-weight: bold;
+}
+
+.pl-md,.pl-mdhf {
+    background-color: #ffecec;
+    color: #bd2c00;
+}
+
+.pl-mdht,.pl-mi1 {
+    background-color: #eaffea;
+    color: #55a532;
+}
+
+.pl-mdr {
+    color: #795da3;
+    font-weight: bold;
+}
+
+.pl-mo {
+    color: #1d3e81;
+}
+.task-list {
+padding-left:10px;
+margin-bottom:0;
+}
+
+.task-list li {
+    margin-left: 20px;
+}
+
+.task-list-item {
+list-style-type:none;
+padding-left:10px;
+}
+
+.task-list-item label {
+font-weight:400;
+}
+
+.task-list-item.enabled label {
+cursor:pointer;
+}
+
+.task-list-item+.task-list-item {
+margin-top:3px;
+}
+
+.task-list-item-checkbox {
+display:inline-block;
+margin-left:-20px;
+margin-right:3px;
+vertical-align:1px;
+}
+</style>
+</head>
+<body>
+<h1>Table of Contents</h1>
+
+<ol>
+<li><a href="#install">install SurFS command line tools</a></li>
+<li><a href="#help">CLI help</a></li>
+<li><a href="#config_file">configuration instruction</a></li>
+<li><a href="#pool">pool management</a></li>
+<li><a href="#volume">volume management(volume)</a></li>
+<li><a href="#snapshot">snap management(snapshot)</a></li>
+<li><a href="#export">export management</a></li>
+</ol>
+
+<p><a name="install"></a></p>
+
+<h2>install SurFS command line tools</h2>
+
+<p>download SurFS CLI tools package from webset,that will include an executable file and a configuration instruction. Follow the steps below:</p>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"># extract the CLI tools package</span>
+tar xvf surfs-cli.tar.gz
+
+<span class="pl-c"># copy "surfs" to /usr/bin</span>
+cp surfs-cli/surfs  /usr/bin
+
+<span class="pl-c"># the configuration file path is "/etc/surfs/config.json"，copy the example file to this path</span>
+mkdir –pv /etc/surfs/
+cp surfs-cli/config.json /etc/surfs/</pre></div>
+
+<h2>output format discription</h2>
+
+<p>Either the command is successfully excute or not it will always return 0,the users need to analysis the "success field" to judge a command is success or not.</p>
+
+<p>all the output is Json format,true in the "success field" means the command is success and false means the command is failed.</p>
+
+<h4>example1</h4>
+
+<p>command success,</p>
+
+<div class="highlight highlight-source-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>version<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.0.0<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>example2</h4>
+
+<p>command failed</p>
+
+<div class="highlight highlight-source-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>message<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>error: volume not found<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>
+}</pre></div>
+
+<p><a name="help"></a></p>
+
+<h2>CLI help</h2>
+
+<h4>show all the commands</h4>
+
+<pre><code>$ surfs  help
+
+NAME:
+   surfs - SurFS command line tool
+
+USAGE:
+   surfs [global options] command [command options] [arguments...]
+
+VERSION:
+   1.0.0 (Git: 8e320cf)
+
+AUTHOR(S):
+   SurDoc
+
+COMMANDS:
+   dumpconfig       Dump configuration
+   info         Get information of surfs cluster
+   connect      Connect to specific pools or all pools if no pool specified
+   disconnect       Disconnect a pool from surfs
+   disk_cab_list    List all pools
+   disk_cab_status  Get status of a pool
+   version      Print version information
+   list         List all volumes in a pool
+   volume       Get volume information
+   create       Create a volume
+   copy         Copy a volume
+   delete       Delete volume or snapshot
+   export       Create iSCSI target for a volume
+   check_export     Check the iSCSI target status of a volume
+   disexport        Delete the iSCSI target of volume
+   snap         Create a snapshot
+   snaplist     List snapshots in a pool
+   snap_to_volume   Create volume from snapshot
+   help, h      Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --debug      debug [$SURFS_DEBUG]
+   --proxy      proxy [$SURFS_PROXY]
+   --timeout "0"    timeout in second
+   --config         config file
+   --log        log file
+   --pretty     pretty json output
+   --help, -h       show help
+   --version, -v    print the version
+
+</code></pre>
+
+<h4>search for the specific command's user guide</h4>
+
+<pre><code>$ surfs help export
+NAME:
+   surfs export - Create iSCSI target for a volume
+
+USAGE:
+   surfs export &lt;iqn_name&gt; &lt;initiator_name&gt; &lt;username:password&gt; &lt;volume_name&gt;
+
+DESCRIPTION:
+   export volume
+</code></pre>
+
+<p><a name="config_file"></a></p>
+
+<h2>configuration manual</h2>
+
+<p>SurFS CLI uses two main configuration files:</p>
+
+<ul>
+<li>config.json: main configuration file</li>
+<li>affiliation.json: this file is using for setting up the priority of the compute node and the storage node,and also the hostip</li>
+</ul>
+
+<h4>main configuration file(config.json)</h4>
+
+<p>default path "/etc/surfs/config.json", use "-config=/path/to/config.json" to set up the configuration file path.</p>
+
+<div class="highlight highlight-source-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>entryPoint<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>http://10.0.76.10:8080<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>debug<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>logfile<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/var/log/surfs.log<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>proxy<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>timeout<span class="pl-pds">"</span></span>: <span class="pl-c1">0</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>workDir<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>/etc/surfs/<span class="pl-pds">"</span></span>
+}</pre></div>
+
+<p>keypoint configuration：</p>
+
+<ul>
+<li>entryPoint: mandatory configuration，SurFS entry server</li>
+<li>workDir: optional configuration,working directory,default path is "/etc/surfs/";CLI will get other configuration files and save data over here</li>
+<li>timeout: request time out,0 by default means never timeout.</li>
+</ul>
+
+<h4>priority set up(affiliation.json)</h4>
+
+<p>the path is "workDir/affiliation.json",the json format is as below:</p>
+
+<div class="highlight highlight-source-json"><pre>[
+    {
+        <span class="pl-s"><span class="pl-pds">"</span>hostip<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>10.0.0.1<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>affiliationIps<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>10.0.76.10<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>10.0.76.20<span class="pl-pds">"</span></span>]
+    },
+    {
+        <span class="pl-s"><span class="pl-pds">"</span>hostip<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>10.0.0.2<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>affiliationIps<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>10.0.76.10<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>10.0.76.20<span class="pl-pds">"</span></span>]
+    }
+]
+</pre></div>
+
+<ul>
+<li>hostip: compute node ip，</li>
+<li>affiliationIps: create volume over those storage node first</li>
+</ul>
+
+<p><a name="pool"></a></p>
+
+<h2>pool management</h2>
+
+<h4>get SurFS version information</h4>
+
+<p>version:get the SurFS version information</p>
+
+<ul>
+<li>cliVersion: SurFS CLI version</li>
+<li>version: SurFS file system version</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs version
+{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>cliVersion<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.0.0<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>version<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.0.0<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>List all the pools in SurFS</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs info
+{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>pools<span class="pl-pds">"</span></span>: [
+            {
+                <span class="pl-s"><span class="pl-pds">"</span>connected<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+                <span class="pl-s"><span class="pl-pds">"</span>pool<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>
+            },
+            {
+                <span class="pl-s"><span class="pl-pds">"</span>connected<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+                <span class="pl-s"><span class="pl-pds">"</span>pool<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>test2<span class="pl-pds">"</span></span>
+            }
+        ],
+        <span class="pl-s"><span class="pl-pds">"</span>version<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.0.0<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>connect to a pool</h4>
+
+<p>surfs connect:connect to all the pools in SurFS or specific ones.</p>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs connect <span class="pl-c1">test</span>
+{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: [
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>free<span class="pl-pds">"</span></span>: 3912375387136,
+            <span class="pl-s"><span class="pl-pds">"</span>ip<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>10.0.76.10<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>pool<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+            <span class="pl-s"><span class="pl-pds">"</span>total<span class="pl-pds">"</span></span>: 3923452624896,
+            <span class="pl-s"><span class="pl-pds">"</span>used<span class="pl-pds">"</span></span>: 11077237760
+        }
+    ],
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>get all the pools information</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs disk_cab_list
+{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: [
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>free<span class="pl-pds">"</span></span>: 3571245271552,
+            <span class="pl-s"><span class="pl-pds">"</span>ip<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>10.0.76.10<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>pool<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+            <span class="pl-s"><span class="pl-pds">"</span>total<span class="pl-pds">"</span></span>: 3923452624896,
+            <span class="pl-s"><span class="pl-pds">"</span>used<span class="pl-pds">"</span></span>: 352207353344
+        }
+    ],
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>get the specific pool information</h4>
+
+<p>pool must be connected or it will return an error.</p>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs disk_cat_status <span class="pl-c1">test</span>
+{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>free<span class="pl-pds">"</span></span>: 3912375387136,
+        <span class="pl-s"><span class="pl-pds">"</span>ip<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>10.0.76.10<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>pool<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>total<span class="pl-pds">"</span></span>: 3923452624896,
+        <span class="pl-s"><span class="pl-pds">"</span>used<span class="pl-pds">"</span></span>: 11077237760
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}
+</pre></div>
+
+<h4>diconnect from a pool</h4>
+
+<p>surfs disconnect:diconnect from a specific pool</p>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs disconnect <span class="pl-c1">test</span>
+{
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<p><a name="volume"></a></p>
+
+<h2>volume management(volume)</h2>
+
+<h4>get the volumes in a pool</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs list <span class="pl-c1">test</span>
+{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: [
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>vol1<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>pool<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>size<span class="pl-pds">"</span></span>: 11075846144
+        }
+    ],
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>get the specific volume information</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs volume vol1
+{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>vol1<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>pool<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>size<span class="pl-pds">"</span></span>: 110756544512
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>creat volume</h4>
+
+<p>create:create volume with parameters：</p>
+
+<ul>
+<li>-V 10G: volume size</li>
+<li>-P hostip: optional parmeter,pick the nearest pool from hostip</li>
+<li>pool/volname | volname: volume name</li>
+</ul>
+
+<p>create volume by the following orders:</p>
+
+<ul>
+<li>If the user specify a pool，create on the specific pool;if there is not enough space,return an error</li>
+<li>specific hostip：
+
+<ul>
+<li>If the hostip is the same as a pool，create on that pool</li>
+<li>If the hostip gets a pool priority,follow the rules</li>
+</ul>
+</li>
+<li>select a biggest pool from all the pools</li>
+<li>Through those steps,if there is not enough space at the current pool ,then jump to the next step until it get one</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs create -V 10G vol2
+{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>vol2<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>pool<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>size<span class="pl-pds">"</span></span>: 10737549312
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>delete volume</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs delete vol2
+{
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>copy volume</h4>
+
+<p>copy:</p>
+
+<ul>
+<li>-f: if the target volume is exist,cover it</li>
+</ul>
+
+<p>Notes:</p>
+
+<ul>
+<li>SurFS only allow to create the target volume in one pool</li>
+<li>copy volume is an asynchronous operation，you can use "copy_progress" to check the status</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs copy vol1 vol1_copy
+{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>ip<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>10.0.76.10<span class="pl-pds">"</span></span>
+    }, 
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>check the rate of copy progress</h4>
+
+<p>copy_progress target_volume_name</p>
+
+<p>get a status when query successfully</p>
+
+<ul>
+<li>"running"</li>
+<li>"completed" </li>
+<li>"failed"</li>
+<li>"notExist" </li>
+</ul>
+
+<p>else success field is false,</p>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs copy_progress vol1_copy
+{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>progress<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>completed<span class="pl-pds">"</span></span>
+    }, 
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}
+</pre></div>
+
+<p><a name="snapshot"></a></p>
+
+<h2>snapshot management(snapshot)</h2>
+
+<h4>get the snapshot list in the specific pool</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs snaplist <span class="pl-c1">test</span>
+{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: [
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>ctime<span class="pl-pds">"</span></span>: 1455712376,
+            <span class="pl-s"><span class="pl-pds">"</span>ip<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>10.0.76.10<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>pool<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>size<span class="pl-pds">"</span></span>: 0,
+            <span class="pl-s"><span class="pl-pds">"</span>snapshot<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>vol1_backup1<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>srcSize<span class="pl-pds">"</span></span>: 110756544512,
+            <span class="pl-s"><span class="pl-pds">"</span>volume<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>vol1<span class="pl-pds">"</span></span>
+        },
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>ctime<span class="pl-pds">"</span></span>: 1455712382,
+            <span class="pl-s"><span class="pl-pds">"</span>ip<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>10.0.76.10<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>pool<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>size<span class="pl-pds">"</span></span>: 0,
+            <span class="pl-s"><span class="pl-pds">"</span>snapshot<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>vol1_backup2<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>srcSize<span class="pl-pds">"</span></span>: 110756544512,
+            <span class="pl-s"><span class="pl-pds">"</span>volume<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>vol1<span class="pl-pds">"</span></span>
+        }
+    ],
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>create snapshot</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs snap vol1 vol1_backup2</pre></div>
+
+<div class="highlight highlight-source-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>ctime<span class="pl-pds">"</span></span>: <span class="pl-c1">1455712382</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>ip<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>10.0.76.10<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>pool<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>size<span class="pl-pds">"</span></span>: <span class="pl-c1">0</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>snapshot<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>vol1_backup2<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>srcSize<span class="pl-pds">"</span></span>: <span class="pl-c1">110756544512</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>volume<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>vol1<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>delete snapshot</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs delete vol1_backup2
+{
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>create volume by snapshot</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs snap_to_volume vol1_backup1 vol1_new1 104G
+{
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<p><a name="export"></a></p>
+
+<h2>export management</h2>
+
+<h4>export the specific volume</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs <span class="pl-k">export</span> iqn.2016-01.com.sursen:storage:vol1 10.0.0.1 user:password vol1
+{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>ip<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>10.0.76.10<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>delete the volume exported</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs disexport vol1
+{
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+
+<h4>check and repair the volume exported</h4>
+
+<div class="highlight highlight-source-shell"><pre>$ surfs check_export iqn.2016-01.com.sursen:storage:vol1 10.0.0.1 foo:bar vol1
+{
+    <span class="pl-s"><span class="pl-pds">"</span>data<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>ip<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>10.0.76.10<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>repaired<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>target<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

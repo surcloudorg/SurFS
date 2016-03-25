@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pools comment="pools" servicepool="mynaspool">    
+    <pool name="mynaspool" comment="test" default="true">
+        <datasource provider="mysql">
+            <serverurl comment="url">jdbc:mysql://localhost:3306/surnas?characterEncoding=utf8</serverurl>
+            <user comment="user">surdoc</user>
+            <password comment="pwd">surdoc_23</password>
+            <maxConnections comment="maxconnections">300</maxConnections>           
+        </datasource>
+    </pool>
+</pools>

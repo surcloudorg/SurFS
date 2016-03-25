@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="no"?>
+<!-- <!DOCTYPE jlanserver SYSTEM "surmount.dtd"> -->
+
+<jlanserver>
+    <servers>
+        <SMB/>
+        <NFS/>
+    </servers>
+	
+    <SMB>
+        <host name="mountserver" domain="com.surfs.nas">
+            <comment>SurfsNas Mount Server</comment>
+            <tcpipSMB/>
+            <disableNIO>false</disableNIO>
+        </host>
+        <sessionDebug flags="ERROR"/>
+        <authenticator type="local">
+            <class>com.surfs.nas.mnt.SurAuthenticator</class>
+            <mode>USER</mode>
+            <NOallowGuest/>
+        </authenticator>
+    </SMB>
+    <NFS>
+        <enablePortMapper/>
+        <PacketPool>200</PacketPool>
+        <ThreadPool>50</ThreadPool>
+        <debug flags="ERROR"/>
+    </NFS>
+    <debug>
+        <output>
+            <class>org.alfresco.jlan.debug.ConsoleDebug</class>     
+            <logFile>surmount</logFile>
+            <append/>
+        </output>
+    </debug>
+    <shares>
+        <!--diskshare name="surfs" comment="Test share">
+            <driver>
+                <class>org.alfresco.jlan.smb.server.disk.JavaFileDiskDriver</class>
+                <LocalPath>e:\test</LocalPath>
+            </driver>
+        </diskshare-->
+    </shares>	
+    <security>
+        <JCEProvider>cryptix.jce.provider.CryptixCrypto</JCEProvider>
+        <shareMapper>
+            <class>com.surfs.nas.mnt.SurShareMapper</class>
+        </shareMapper>
+        <usersInterface>
+            <class>com.surfs.nas.mnt.SurUsers</class>
+        </usersInterface>
+    </security>
+</jlanserver>

@@ -1,0 +1,11 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"path": "github.com/codegangsta/cli",
+			"revision": "114097b8166ebf59ed86bd8aa6d739ff154de4e7",
+			"revisionTime": "2016-01-28T18:17:57-08:00"
+		}
+	]
+}

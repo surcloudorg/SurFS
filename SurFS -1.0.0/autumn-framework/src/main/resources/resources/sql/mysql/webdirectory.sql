@@ -1,0 +1,21 @@
+CREATE TABLE `webdirectory` (
+  `id` INTEGER(8) NOT NULL AUTO_INCREMENT COMMENT '目录标识',
+  `host` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '主机',
+  `dirname` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '目录名',
+  `title` VARCHAR(60) DEFAULT NULL COMMENT '注释',
+  `classname` VARCHAR(80) DEFAULT NULL COMMENT '类名',
+  `defaultpage` VARCHAR(20) DEFAULT NULL COMMENT '首页',
+  `iplist` VARCHAR(100) DEFAULT NULL COMMENT '需要验证ip，null不验证',
+  `logintype` TINYINT(2) NOT NULL DEFAULT 0 COMMENT '认证类型，0禁止访问，1需要登录，2不需登录，3公共目录,4需要basic认证',
+  `params` TEXT COMMENT '配置',
+  `logname` VARCHAR(20) NOT NULL DEFAULT 'system' COMMENT '日志目录',
+  `charset` VARCHAR(20) DEFAULT NULL COMMENT 'http请求编码',
+  `memo` TEXT COMMENT '备注',
+  `createtime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建/修改时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dirname` (`dirname`, `host`),
+  KEY `title` (`title`),
+  KEY `classname` (`classname`),
+  KEY `logintype` (`logintype`),
+  KEY `createtime` (`createtime`)
+);
