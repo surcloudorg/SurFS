@@ -1,10 +1,14 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 package main
 
 import (
 	"errors"
 	"github.com/codegangsta/cli"
 	"strings"
-	"surfs"
+	"surfscli"
 )
 
 var volumeCommands = []cli.Command{
@@ -303,7 +307,7 @@ func cmdDeleteVolumeOrSnap(c *cli.Context) {
 		return
 	}
 
-	if err != surfs.ErrVolumeNotFound {
+	if err != surfscli.ErrVolumeNotFound {
 		goto printError
 	} else {
 		// Maybe this is a snapshot?
@@ -312,7 +316,7 @@ func cmdDeleteVolumeOrSnap(c *cli.Context) {
 			printData(&deleteVolumeInfo{server.IP})
 			return
 		} else {
-			if err == surfs.ErrSnapshotNotFound {
+			if err == surfscli.ErrSnapshotNotFound {
 				err = errors.New("volume/snapshot not found")
 			}
 		}
@@ -362,6 +366,6 @@ func cmdCopyVolumeProgress(c *cli.Context) {
 			Progress string `json:"progress"`
 		}
 
-		printData(&copyVolumeProgress{surfs.ProgressToString(prg)})
+		printData(&copyVolumeProgress{surfscli.ProgressToString(prg)})
 	}
 }

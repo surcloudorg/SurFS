@@ -1,4 +1,8 @@
-package surfs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+package surfscli
 
 // The logic of pool selection when creating a volume.
 // 1. If user specify the pool name when creating volume, then we use

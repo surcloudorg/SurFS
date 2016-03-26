@@ -1,3 +1,7 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 package main
 
 import (
@@ -9,7 +13,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"surfs"
+	"surfscli"
 )
 
 const (
@@ -64,7 +68,7 @@ func parseChapInfo(chap string) (user, pwd string, err error) {
 	return chap[:colonPos], chap[colonPos+1:], nil
 }
 
-func parseExportArgs(args []string) (*surfs.VolExportReq, error) {
+func parseExportArgs(args []string) (*surfscli.VolExportReq, error) {
 	if len(args) != 5 && len(args) != 4 {
 		return nil, errors.New("error: invalid args\n")
 	}
@@ -82,10 +86,10 @@ func parseExportArgs(args []string) (*surfs.VolExportReq, error) {
 		return nil, errors.New("error: invalid args\n")
 	}
 
-	req := &surfs.VolExportReq{
+	req := &surfscli.VolExportReq{
 		IqnName:       iqn,
 		InitiatorName: initiator,
-		Chap:          surfs.ChapInfo{user, pwd},
+		Chap:          surfscli.ChapInfo{user, pwd},
 		VolName:       volname,
 		HostIp:        hostip,
 	}
@@ -151,14 +155,14 @@ func getConfigFileLoc(ctx *cli.Context) string {
 	}
 }
 
-func loadConfig(ctx *cli.Context) (*surfs.Config, error) {
+func loadConfig(ctx *cli.Context) (*surfscli.Config, error) {
 	data := make([]byte, 0)
 	data, err := ioutil.ReadFile(getConfigFileLoc(ctx))
 	if err != nil {
 		return nil, err
 	}
 
-	cfg := surfs.NewDefaultConfig()
+	cfg := surfscli.NewDefaultConfig()
 	err = json.Unmarshal(data, cfg)
 	if err != nil {
 		return nil, err
@@ -169,7 +173,7 @@ func loadConfig(ctx *cli.Context) (*surfs.Config, error) {
 	return cfg, nil
 }
 
-func adjustConfig(ctx *cli.Context, cfg *surfs.Config) {
+func adjustConfig(ctx *cli.Context, cfg *surfscli.Config) {
 	if ctx.GlobalBool("debug") {
 		cfg.Debug = ctx.GlobalBool("debug")
 	}

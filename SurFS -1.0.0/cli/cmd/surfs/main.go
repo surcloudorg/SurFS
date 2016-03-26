@@ -1,3 +1,7 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 package main
 
 import (
@@ -5,8 +9,8 @@ import (
 	"fmt"
 	"github.com/codegangsta/cli"
 	"os"
-	"surfs"
-	"surfs/version"
+	"surfscli"
+	"surfscli/version"
 )
 
 var (
@@ -20,13 +24,13 @@ func cmdDumpConfig(c *cli.Context) {
 	fmt.Printf("%s\n", string(b))
 }
 
-func createClient(ctx *cli.Context) *surfs.Client {
+func createClient(ctx *cli.Context) *surfscli.Client {
 	cfg, err := loadConfig(ctx)
 	if err != nil {
 		printErrorAndExit("error: failed to load config: %v", err)
 	}
 	adjustConfig(ctx, cfg)
-	c, err := surfs.NewClient(cfg)
+	c, err := surfscli.NewClient(cfg)
 	if err != nil {
 		printErrorAndExit("error: failed to init client: %v", err)
 	}

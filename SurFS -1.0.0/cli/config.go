@@ -1,4 +1,8 @@
-package surfs
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+package surfscli
 
 // SurFS client configation
 type Config struct {
@@ -30,7 +34,7 @@ type Config struct {
 
 	// Where to output logs. If empty, all logs will be printed to
 	// stdout. 
-	// Default is "/var/log/surfs.log"
+	// Default is "/var/log/surfscli.log"
 	LogFile string `json:"logfile"`
 }
 
@@ -42,6 +46,6 @@ func NewDefaultConfig() *Config {
 		Timeout:    0,
 		Proxy:      "",
 		Debug:      false,
-		LogFile:    "/var/log/surfs.log",
+		LogFile:    "/var/log/surfscli.log",
 	}
 }

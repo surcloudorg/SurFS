@@ -8,17 +8,17 @@ BINDATA=cmd/surfs/assets/config.go
 BINARY=bin/surfs
 GIT_SHA=$(shell git rev-parse --short HEAD)
 
-PACKAGES=surfs
+PACKAGES=.
 
-LDFLAGS="-X surfs/version.GitRevision=$(GIT_SHA) \
-	-X surfs/version.Version=$(VERSION) \
-	-X surfs/version.BuildTime=$(BUILD_TIME)"
+LDFLAGS="-X ./version.GitRevision=$(GIT_SHA) \
+	-X ./version.Version=$(VERSION) \
+	-X ./version.BuildTime=$(BUILD_TIME)"
 
 .PHONY: all
 all: $(BINARY)
 
 $(BINARY): $(SOURCES)
-	go build -ldflags $(LDFLAGS) -o bin/surfs surfs/cmd/surfs
+	go build -ldflags $(LDFLAGS) -o bin/surfs ./cmd/surfs
 
 .PHONY: install
 install:
