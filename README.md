@@ -21,7 +21,7 @@ INSTALLATION
 /SurFS -1.0.0/surfs-nas/：SurDoc distrubuted file system engineering, depends on two sub-engineerings: autumn-framework and alfresco-jlan. It is built by maven format, and can be compiled by common java IDE.
 See the appropriate file:
 /SurFS -1.0.0/surfs-nas/bin/readme.txt: Describes the installation, operation and usage of SurFS distributed file system.
-/SurFS -1.0.0/cli/doc/SurFS-CLI-Manual-en.html: Install SurFS Client command line tools
+/SurFS -1.0.0/cli/doc/SurFS-CLI-Manual-en.html: Install SurFS Client command line tools.
 
 
 SUPPORT
