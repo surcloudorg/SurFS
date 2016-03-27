@@ -1,3 +1,7 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 package com.autumn.console;
 
 import com.autumn.core.ClassFileFilter;
@@ -6,7 +10,6 @@ import com.autumn.util.Compiler;
 import com.autumn.util.FileOperation;
 import com.autumn.util.IOUtils;
 import com.autumn.util.TextUtils;
-import com.autumn.util.zlib.Zipper;
 import java.io.*;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -251,7 +254,7 @@ public class FileManager extends Action {
                     httpServletResponse.reset();
                     httpServletResponse.setContentType("application/octet-stream; charset=UTF-8");
                     httpServletResponse.addHeader("Content-Disposition", "attachment; filename=\"" + ext + "\"");
-                    Zipper.zip(httpServletResponse.getOutputStream(), f.getAbsolutePath());
+                    //Zipper.zip(httpServletResponse.getOutputStream(), f.getAbsolutePath());
                     return null;
                 } else {
                     if (f.length() <= 0) {
