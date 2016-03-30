@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<config>
-    <serverInfo  comment="服务信息" method="true" />
-    <showVols  comment="查看本地卷" method="true" />
-    <handlers comment="打开的文件" method="true">
-        <volumeid comment="卷标"></volumeid>
-    </handlers>
-</config>
