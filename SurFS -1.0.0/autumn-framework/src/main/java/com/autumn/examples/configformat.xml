@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<config>
-  <param1 comment="参数1">param1value</param1>
-  <param2 comment="参数2">param2value</param2>
-  <method comment="方法" method="true">
-       <param comment="调用method的参数">paramvalue</param>
-  </method >
-</config>
