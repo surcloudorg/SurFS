@@ -9,7 +9,7 @@ The SurFS toolkit includes both SurFS server SurFS client
 
 INSTALLATION
 
-/SurFS -1.0.0/surfs-nas/：SurCloud is a distributed file system that incorporates two 3rd party projects: autumn-framework and alfresco-jlan. It is built with maven format and can be compiled with any common java IDE or on the command line.
+/SurFS -1.0.0/surfs-nas/：SurCloud is a distributed file system that incorporates two 3rd party projects: alfresco-jlan. It is built with maven format and can be compiled with any common java IDE or on the command line.
 
 For further information please refer:
 
