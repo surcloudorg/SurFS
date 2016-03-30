@@ -1,183 +1,184 @@
-﻿1.部署服务端程序(surnas)
+1. Deploy server program(surnas)
   
-  配置存储服务的数据库地址端口
+  Configure database address port of storage service.
 　%surfs-nas%/bin/surfs_pools.xml
-　如：jdbc:mysql://localhost:3306/surnas?characterEncoding=utf8，
-　localhost是mysql服务器地址，3306是mysql服务器端口
-　surnas是mysql服务器中的一个数据库，需要手动创建，并将字符集编码设置为utf8
-  user:访问帐号
-　pwd:访问密码
+　e.g. jdbc:mysql://localhost:3306/surnas?characterEncoding=utf8，
+　localhost is mysql’s server address，3306 is mysql’s server port
+　surnas is a database in mysql server，which needs to manually create, and set CCSID to utf8
+  user: access account
+　pwd: access password
  
-  启动%surfs-nas%/bin/cmdline/surserver.sh
-  一般数据库配置没问题,服务应该可以正常启动，否则从屏幕可以输出对应错误
-  登陆控制台 http://ip:8080/login.jsp,帐号:surfs 密码:surfs
-  设置参数,详情请见 %surfs-nas%/doc/书生NAS存储系统安装配置手册V1.0.doc
+  Start %surfs-nas%/bin/cmdline/surserver.sh
+  There’s no problem for general database configuration, the service should be able to normally boot; Otherwise it can output the corresponding errors from the screen. 
+  Log in the console http://ip:8080/login.jsp, account:surfs; password:surfs
+  For setting parameters, specific to view %surfs-nas%/doc/SurDoc NAS Storage System Installation and Configuration Manual V1.0.doc
 
-  服务调试完毕后,关闭上面命令行启动的服务,将服务端程序安装为系统服务
+  After Service debugging, close above services launched from the command line, and change server program to system services.
   %surfs-nas%/bin/service/surnas.sh install
 
-  安装成功后,服务名surnas
-  可通过service surnas start/stop/restart/status 启动,停止,重启,查看状态
+  After successful installation, the service name is: surnas
+  It can through service surnas start/stop/restart/status to start, stop, restart, and check status.
    
-  卸载surnas服务
+  Uninstall surnas service
   %surfs-nas%/bin/service/surnas.sh remove
 
-  几个主要的服务运行参数
-　编辑%surfs-nas%/bin/surserver.conf
+  Major service operation parameters
+　Edit %surfs-nas%/bin/surserver.conf
 
-  1)调整服务JVM内存占用
+  1) Adjust service JVM memory footprint
   wrapper.java.initmemory=1500
   wrapper.java.maxmemory=3000
-  可根据本机内存情况分配JVM内存
+  It can allocate JVM memory according to the situation of native memory 
 
-　2)控制台http服务端口(http://ip:8080/login.jsp)
+　2) Console http port (http://ip:8080/login.jsp)
 　wrapper.app.parameter.1=port=8080　
-  默认8080端口
+  The default is port 8080
 
-  3)文件传输服务端口地址
+  3) File transfer service port address
   wrapper.java.additional.4=-Dcom.surfs.nas.transport.TcpServer.Port=8020
   wrapper.java.additional.5=-Dcom.surfs.nas.transport.TcpServer.Host=
-  默认8020端口
-　如果不指定Host，客户端使用本服务器的机器名来访问本存储服务
-　如果指定Host(一般是ip地址)，客户端使用指定的ip地址来访问本存储服务
+  The default is port 8020
+　If you do not specify a host, the client will use the name of this server to access to the storage service
+　If you specify a host (typically is IP address), the client will use the specified IP address to access to the storage service
 
-　启动surnas服务
+　Start surnas service
   service surnas start
 
-2.linux平台部署客户端程序(surmount)
+2.Deploy client program on Linux platform (surmount) 
 
-  关闭本机的nfs服务,释放端口2049
-  关闭rpc服务,释放端口111
-  关闭simba服务,释放端口445
+  Shut down the native NFS service, and release port 2049
+  Shut down rpc service, and release port 111
+  Shut down simba service, and release port 445
  
   service nfs stop
   service rpcbind stop
   service smb stop
-  最好禁用 
+  It’s better to disable them. 
 
-  配置几个主要的服务运行参数
-　编辑%surfs-nas%/bin/surmount.conf
+  Configure several major service operation parameters
+　Edit %surfs-nas%/bin/surmount.conf
 
-  1)调整服务JVM内存占用
+  1) Adjust service JVM memory footprint
   wrapper.java.initmemory=1500
   wrapper.java.maxmemory=3000
-  可根据本机内存情况分配JVM内存
+  It can allocate JVM memory according to the situation of native memory
 
-　2)指定存储节点的http服务地址端口
+　2)Specify the HTTP service address port of storage node
 　wrapper.java.additional.1=-Dsurfs_server=ip1:8080;ip2:8080
-　可指定多个服务节点的ip和端口，用";"号隔开
+　It can specify more than one service node IP and port, use ";”to separate
 
-  启动%surfs-nas%/bin/cmdline/surmount.sh 
-  一般存储节点的http服务地址端口配置没问题,服务应该可以正常启动，否则从屏幕可以输出对应错误
+  Start %surfs-nas%/bin/cmdline/surmount.sh 
+  There’s no problem for HTTP service address port configuration of general storage nodes, the service should be able to normally boot; otherwise it can output the corresponding errors from the screen.
 
-  启动成功后,用下面方法将nas卷挂载至本地目录
-  nfs方式，可能需要安装nfs客户端工具
+  After start successfully, use the following method to mount nas volume to local directory
+  Nfs method, may need to install the nfs client tools
   yum install nfs-utils
-  mount命令
+  mount command
   mount -t nfs -o nolock localhost:/surfs /mnt/testnfs
-  /surfs：要挂载的卷，在nas存储服务终端创建的挂载点
-  /mnt/testnfs：要挂在的本地目录，必须存在
+  /surfs： the volume needs to be mounted. It is a mount point created in nas storage service terminal
+  /mnt/testnfs： The local directory that needs to mount to, which must exist
 
-  cifs方式，可能需要装smb客户端工具
+  cifs method，may need to install the smb client tools
   yum install cifs-utils
-  mount命令
+  mount command
   mount -t cifs -o username=surfs,password=surfs //localhost/surfs /mnt/testsmb
-  /surfs：要挂载的卷，在nas存储服务终端界面创建的挂载点
-  /mnt/testnfs：要挂在的本地目录，必须存在
-  账号密码：在nas存储服务终端界面创建的可以访问挂载点/surfs的用户
+  /surfs： the volume needs to be mounted. It is a mount point created in nas storage service terminal interface
+  /mnt/testnfs： The local directory that needs to mount to, which must exist
+  account and password：the accessible mount point created in the nas storage service terminal interface/surfs’ users
 
-  安装surmount为linux服务 
-  运行 %surfs-nas%/bin/service/surmount.sh install
+  Install surmount for linux service
+  Running %surfs-nas%/bin/service/surmount.sh install
 
-  启动,停止,重启服务,查看状态
+  Start,stop,restart service,check status
   service surmount start/stop/restart/status
    
-  卸载surmount服务
-  运行 %surfs-nas%/bin/service/surmount.sh remove
+  Uninstall surmount service
+  Running %surfs-nas%/bin/service/surmount.sh remove
  
-3.windows平台部署客户端程序(surmount)
+3.Deploy client program on Windows platform(surmount) 
 
-  关闭windows文件共享服务（即关闭445端口）
-  /控制面板/管理工具/服务...
-  找到windows共享服务
-  	显示名称为 Server
-  	服务名称为 LanmanServer
-  	服务描述为 支持此计算机通过网络的文件、打印、和命名管道共享。如果服务停止，这些功......
-  将此服务禁用,重启windows(必需)释放445端口
+  Close Windows file sharing service（i.e. close port 445）
+  /control panel/management tool/service...
+  Find Windows sharing service
+  	Display name: Server
+  	Service name: LanmanServer
+  	Service description is: Support the computer through the network’s file, print, and named pipe to share. If the service stops, these……
+  Disable the service, restart Windows(must)release port 445
 
-  关闭windows的nfs服务（关闭111,2049端口）
-  	显示名称为 Server for NFS
-  	服务名称为 NfsService
-  	服务描述为 使基于 Windows 的计算机可以用作 NFS 服务器
-  同样需要重启windows
+  Close Windows’ nfs service（close port 111,2049）
+  	Display name: Server for NFS
+  	Service name: NfsService
+  	Service description is: to make the computer which is based on Windows can be used as a NFS server 
+  Also need to restart Windows
 
-  配置几个主要的服务运行参数
-　编辑%surfs-nas%/bin/surmount.conf
+  Configure several major service operation parameters
+　Edit %surfs-nas%/bin/surmount.conf
 
-  1)调整服务JVM内存占用
+  1)Adjust service JVM memory footprint
   wrapper.java.initmemory=1500
   wrapper.java.maxmemory=3000
-  可根据本机内存情况分配JVM内存
+  It can allocate JVM memory according to the situation of native memory
 
-　2)指定存储节点的http服务地址端口
+　2)Specify the HTTP service address port of storage node
 　wrapper.java.additional.1=-Dsurfs_server=ip1:8080;ip2:8080
-　可指定多个服务节点的ip和端口，用";"号隔开
+　It can specify more than one service node IP and port, use ";”to separate
 
-  启动%surfs-nas%/bin/cmdline/surmount.bat 
-  一般存储节点的http服务地址端口配置没问题,服务应该可以正常启动，否则从屏幕可以输出对应错误
+  Start %surfs-nas%/bin/cmdline/surmount.bat 
+  There’s no problem for HTTP service address port configuration of general storage nodes, the service should be able to normally boot; otherwise it can output the corresponding errors from the screen.
 
-  成功后,用下面方法将nas卷映射为本地驱动器
-  nfs方式，可能需要安装nfs客户端工具，win7以后操作系统，自带nfs客户端，
-  win7以前操作系统,可从微软官网下载安装nfs客户端
-  mount命令
+  After start successfully, use the following method to map nas volume to local drives
+  nfs method，may need to install the nfs client tools. After Win 7, the operating system includes the NFS client
+  Before Win7, nfs client can be downloaded from Microsoft's website
+  mount command
   mount -o nolock \\localhost\surfs z:
-  /surfs：要挂载的卷，在nas存储服务终端创建的挂载点
-  z：要挂载到的本地磁盘驱动号
+  /surfs： the volume needs to be mounted. It is a mount point created in nas storage service terminal
+  z：the local disk drive which needs to mount to
   
-  cifs方式
-  -〉映射网络驱动器
-  -〉文件夹填 \\localhost\surfs
-  -〉输入在nas存储服务终端界面创建的可以访问挂载点/surfs的账号密码
+  cifs method
+  -〉map network driver
+  -〉Fill in the folder \\localhost\surfs
+  -〉Input accessible mount point created in the nas storage service terminal interface/surfs’ account and password
 
-  对于有些版本windows挂载时验证错误问题
-  运行"secpol.msc",点击"安全设置\本地安全策略\安全选项",找到右边的"网络安全:LAN管理器身份验证级别"选项
-  将"没有定义"改为"发送LM和NTLM-如果已协商....."
-  重试即可
+  For some versions’ validation error problems when mounted Windows
+  Running "secpol.msc", click" Security Settings\ Local security policy\ Security options",on the right to find “Network security: LAN manager authentication level"option
+  Change “Not Defined" to “Send LM and NTLM-if has negotiated....."
+  Retry is OK.
 
-  安装surmount为windows服务 
-  运行 %surfs-nas%/bin/service/install-surmount.bat
+  Install surmount for Windows service
+  Running %surfs-nas%/bin/service/install-surmount.bat
  
-  可通过services.msc工具启停surmount(Surfs Mount Server)服务
+  Can use services.msc tool to start and stop surmount(Surfs Mount Server)service
    
-  卸载surmount服务
-  运行 %surfs-nas%/bin/service/uninstall-surmount.bat
+  Uninstall surmount service
+  Running %surfs-nas%/bin/service/uninstall-surmount.bat
 
-4.surmount服务,启动选项
-  默认的surmount服务启动了 nfs/cifs服务端口 (445,111,2049)
-  也可以仅启用nfs端口,或cifs服务端口
-  编辑%surfs-nas%/bin/surmount.xml的servers节点
-  如下：启动了nfs/cifs服务端口
+4. surmount service, startup options
+  The default surmount service launched nfs/cifs port (445,111,2049)
+  It can also only enable nfs port, or cifs port
+  Edit servers node in %surfs-nas%/bin/surmount.xml
+  As follows：launched nfs/cifs port
     <servers>
         <SMB/>
         <NFS/>
     </servers>
-  如下：仅启动了nfs服务端口
+  As follows：only launched nfs port
     <servers>
         <noSMB/>
         <NFS/>
     </servers>
-  如下：仅启动了cifs服务端口
+  As follows：only launched cifs port
     <servers>
         <SMB/>
         <noNFS/>
     </servers>
-  这样就可以选择禁用系统服务,比如不启动cifs服务,就可以不用禁用系统445端口服务
+  So you can choose to disable the system services, such as do not start cifs service, thus it doesn’t need to disable system port 445.
 
-5.服务日志
+5. Service log
 
-  如果服务无法启动，或启动失败
-  具体可查看 %surfs-nas%/log/surmount.log(surserver.log)查找原因
+  If the service cannot be started, or launch failed
+  Specific to view %surfs-nas%/log/surmount.log(surserver.log) to find the reason
 
-  服务启动后运行时日志
-  服务端surnas,查看%surfs-nas%/log/server/sysytem/*
-  客户端surmount,查看%surfs-nas%/log/client/sysytem/*
+  The runtime log after service starts
+  Server-side surnas,to view %surfs-nas%/log/server/sysytem/*
+  Client-side surmount,to view %surfs-nas%/log/client/sysytem/*
+
