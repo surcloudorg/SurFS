@@ -9,36 +9,20 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:appContext-surfs.xml</param-value>
     </context-param>
-    
-    <context-param>
-        <description>允许访问console的ip地址,默认仅允许私网IP，填""允许所有IP</description>
-        <param-name>consoleIp</param-name>
-        <param-value/>
-    </context-param>
-    
+        
     <listener>
-        <description>autumn框架系统初始化类，请不要修改删除</description>
-        <listener-class>com.autumn.core.web.Initializer</listener-class>
+        <description>com.surfs.nas.server.Initializer</description>
+        <listener-class>com.surfs.nas.server.Initializer</listener-class>
     </listener>
     
     <filter>
-        <description>autumn框架web过滤器，请不要修该删除</description>
-        <filter-name>dispatchfilter</filter-name>
-        <filter-class>com.autumn.core.web.DispatchFilter</filter-class>
-        <init-param>
-            <description>默认request编码</description>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-        <init-param>
-            <description>以下url跳过过滤器,正则表达式</description>
-            <param-name>excludes</param-name>
-            <param-value>^css/|^images/|^font-awesome/|^favicon.ico</param-value>
-        </init-param>
+        <description>com.surfs.nas.server.HttpService</description>
+        <filter-name>nascontroller</filter-name>
+        <filter-class>com.surfs.nas.server.HttpService</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>dispatchfilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <filter-name>nascontroller</filter-name>
+        <url-pattern>/zfs/*</url-pattern>
     </filter-mapping>
 
     <filter>
