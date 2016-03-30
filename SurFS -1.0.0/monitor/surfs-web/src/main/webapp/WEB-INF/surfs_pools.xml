@@ -1,31 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--servicepool:服务端有效，表示当前服务所对应的存储池是哪个-->
-<pools comment="文件系统存储池配置信息表" servicepool="localpod/localcluster">
+
+<pools comment="" servicepool="localpod/localcluster">
    
-    <!-- <pool name="localpod/localcluster" comment="测试数据中心-test" default="true">
+    <pool name="localpod/localcluster" comment="1" >
         <datasource provider="mysql">
-            <serverurl comment="服务URL">jdbc:mysql://10.0.0.65:3306/test?characterEncoding=utf8</serverurl>
-            <user comment="账号">surdoc</user>
-            <password comment="密码">surdoc_23</password>
-            <maxConnections comment="可创建最大连接数">100</maxConnections>
-        </datasource>
-    </pool> -->
-    
-    <!-- <pool name="localpod/localcluster3" comment="测试数据中心-surfs-nas-test">
-        <datasource provider="mysql">
-            <serverurl comment="服务URL">jdbc:mysql://10.0.0.65:3306/surfs-nas-test?characterEncoding=utf8</serverurl>
-            <user comment="账号">surdoc</user>
-            <password comment="密码">surdoc_23</password>
-            <maxConnections comment="可创建最大连接数">100</maxConnections>
-        </datasource>
-    </pool> -->
-    
-    <pool name="localpod/localcluster" comment="测试数据中心1" >
-        <datasource provider="mysql">
-            <serverurl comment="服务URL">jdbc:mysql://10.0.76.10:3306/surnas?characterEncoding=utf8</serverurl>
-            <user comment="账号">surdoc</user>
-            <password comment="密码">surdoc</password>
-            <maxConnections comment="可创建最大连接数">100</maxConnections>
+            <serverurl comment="">jdbc:mysql://10.0.76.10:3306/surnas?characterEncoding=utf8</serverurl>
+            <user comment="">surdoc</user>
+            <password comment="">surdoc</password>
+            <maxConnections comment="">100</maxConnections>
         </datasource>
     </pool>
     
