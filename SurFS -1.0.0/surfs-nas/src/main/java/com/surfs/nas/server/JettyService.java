@@ -9,19 +9,17 @@ package com.surfs.nas.server;
 import com.surfs.nas.util.MainArgs;
 import org.mortbay.jetty.Server;
 
-import org.tanukisoftware.wrapper.WrapperListener;
-import org.tanukisoftware.wrapper.WrapperManager;
-
-public class JettyService implements WrapperListener {
+public class JettyService {
 
     private int port = 8080;
     private Server server;
 
     public static void main(String[] args) {
-        WrapperManager.start(new JettyService(), args);
+        JettyService jetty = new JettyService();
+        jetty.start(args);
+        
     }
 
-    @Override
     public Integer start(String[] strings) {
         try {
             MainArgs param = new MainArgs(strings);
@@ -35,23 +33,11 @@ public class JettyService implements WrapperListener {
         return null;
     }
 
-    @Override
     public int stop(int exitCode) {
         try {
             JettyServer.stop(server);
         } catch (Exception ex) {
         }
         return exitCode;
-    }
-
-    @Override
-    public void controlEvent(int event) {
-        if (WrapperManager.isControlledByNativeWrapper() == false) {
-            if (event == WrapperManager.WRAPPER_CTRL_C_EVENT
-                    || event == WrapperManager.WRAPPER_CTRL_CLOSE_EVENT
-                    || event == WrapperManager.WRAPPER_CTRL_SHUTDOWN_EVENT) {
-                WrapperManager.stop(0);
-            }
-        }
     }
 }

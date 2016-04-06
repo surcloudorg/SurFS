@@ -121,11 +121,6 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>wrapper</groupId>
-            <artifactId>wrapper</artifactId>
-            <version>3.5.1</version>
-        </dependency>
-        <dependency>
             <groupId>com.autumn</groupId>
             <artifactId>autumn-framework</artifactId>
             <version>3.0-SNAPSHOT</version>
