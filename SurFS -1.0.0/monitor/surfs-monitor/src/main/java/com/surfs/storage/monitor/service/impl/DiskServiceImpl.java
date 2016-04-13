@@ -153,9 +153,9 @@ public class DiskServiceImpl implements DiskService {
 				Map<String, Disk> disks = frontBack.get(disk.getPanel());
 				if (disks.containsKey(disk.getDisk())) {
 					Disk diskMap = disks.get(disk.getDisk());
-					// 新加入的disk是local
+					
 					if (disk.getLocation().equals("local")) {
-						// 新加入的disk和map中的disk的localtion相等，并池名称不相等
+						
 						if (disk.getLocation().equals(diskMap.getLocation())
 								&& !disk.getZpoolName().equals(diskMap.getZpoolName())) {
 							diskMap.setZpoolName(diskMap.getZpoolName() + "," + disk.getZpoolName());
@@ -182,10 +182,10 @@ public class DiskServiceImpl implements DiskService {
 
 	@Override
 	public Map<String, Map<String, Map<String, Disk>>> getDiskInfos() {
-		// 合并本地远程disk
+	
 		Map<String, Map<String, Map<String, Disk>>> mergeDisks = mergeDisks(
 				getLocalDiskInfos(), getRemoteDiskInfos());
-		// 填充没有盘位的disk信息
+		
 		fillNotConnectedDisks(mergeDisks);
 
 		return mergeDisks;
@@ -193,7 +193,7 @@ public class DiskServiceImpl implements DiskService {
 	
 	@Override
 	public List<Disk> getLocalDiskInfos() {
-		// <jbodid, <面板(f/b), <盘位(8-28/12-35), disk对象>>>
+	
 		List<Disk> disks = new ArrayList<>();
 		BufferedReader bufReader = null;
 		try {
@@ -241,7 +241,7 @@ public class DiskServiceImpl implements DiskService {
 	}
 	
 	private Map<String, Map<String, Map<String, Disk>>> mergeDisks(List<Disk> locals, List<Disk> remotes) {
-		// <jbodid, <面板(f/b), <盘位(8-28/12-35), disk对象>>>
+	
 		Map<String, Map<String, Map<String, Disk>>> mergeDisks = new HashMap<>();
 
 		addDisk(mergeDisks, locals);
@@ -263,12 +263,12 @@ public class DiskServiceImpl implements DiskService {
 		for (Entry<String, Map<String, Map<String, Disk>>> jbodDisks : mapDisks.entrySet()) {
 			String jbod = jbodDisks.getKey();
 			Map<String, Map<String, Disk>> panelDisksMap = jbodDisks.getValue();
-			// 前面板没有可用的盘
+			
 			if (!panelDisksMap.containsKey("f")) {
 				Map<String, Disk> front = new TreeMap<>(new DiskComparator());
 				panelDisksMap.put("f", front);
 			}
-			// 后面板没有可用的盘
+			
 			if (!panelDisksMap.containsKey("b")) {
 				Map<String, Disk> back = new TreeMap<>(new DiskComparator());
 				panelDisksMap.put("b", back);
@@ -288,15 +288,7 @@ public class DiskServiceImpl implements DiskService {
 		}
 	}
 	
-	/**
-	 * 填充没有的盘位
-	 * 
-	 * @param jbod
-	 * @param panel
-	 * @param disks
-	 * @param start
-	 * @param end
-	 */
+
 	private void addNotConnectedDisks(String jbod, String panel,
 			Map<String, Disk> disks, int start, int end) {
 		for (int i = start; i <= end; i++) {

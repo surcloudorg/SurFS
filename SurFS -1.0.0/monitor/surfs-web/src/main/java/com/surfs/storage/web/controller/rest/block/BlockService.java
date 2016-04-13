@@ -136,15 +136,7 @@ public class BlockService {
 		
 	}
 
-	/////////////////////////////////////////////////////////////////////
-	///////////////////////////////pool/////////////////////////////////
-	///////////////////////////////////////////////////////////////////
-	/**
-	 * 显示本机pool信息及状态
-	 * 
-	 * @return
-	 * @throws IOException
-	 */
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/pool/status")
 	@ResponseBody
 	public String getPoolStatus() throws IOException {
@@ -185,18 +177,7 @@ public class BlockService {
 		
 	}
 
-	/////////////////////////////////////////////////////////////////////
-	//////////////////////////////volume////////////////////////////////
-	///////////////////////////////////////////////////////////////////
-	/**
-	 * 创建新卷
-	 * 
-	 * @param pool
-	 * @param volume
-	 * @param size
-	 * @return
-	 * @throws IOException 
-	 */
+
 	//@RequestMapping(method = RequestMethod.POST, value = "/volume/create/{pool}/{volume}/{size}")
 	@RequestMapping(method = RequestMethod.POST, value = "/volume/create")
 	@ResponseBody
@@ -216,14 +197,7 @@ public class BlockService {
 		return objectMapper.writeValueAsString(map);
 	}
 
-	/**
-	 * 删除指定的卷
-	 * 
-	 * @param pool
-	 * @param volume
-	 * @return
-	 * @throws IOException 
-	 */
+
 	@RequestMapping(method = RequestMethod.POST, value = "/volume/delete")
 	@ResponseBody
 	public String deleteVolume(@RequestParam String poolvolume) throws IOException {
@@ -241,12 +215,7 @@ public class BlockService {
 		return objectMapper.writeValueAsString(map);
 	}
 	
-	/**
-	 * 列出所有的卷
-	 * 
-	 * @return
-	 * @throws IOException 
-	 */
+
 	@RequestMapping(method = RequestMethod.GET, value = "/volume/list")
 	@ResponseBody
 	public String listVolume() throws IOException {
@@ -303,16 +272,7 @@ public class BlockService {
 		return objectMapper.writeValueAsString(map);
 	}
 	
-	/**
-	 * 卷拷贝，将源卷拷贝到目标卷上
-	 * 
-	 * @param sourcepool
-	 * @param sourcevolume
-	 * @param destpool
-	 * @param destvolume
-	 * @return
-	 * @throws IOException 
-	 */
+
 	@RequestMapping(method = RequestMethod.POST, value = "/volume/copy")
 	@ResponseBody
 	public String copyVolume(@RequestParam final String sourcepoolvolume,
@@ -365,12 +325,7 @@ public class BlockService {
 		return objectMapper.writeValueAsString(map);*/
 	}
 	
-	/**
-	 * 获得卷拷贝状态
-	 * 
-	 * @param volume 卷名称
-	 * @return
-	 */
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/volume/copystatus/{volume}")
 	@ResponseBody
 	public String copyVolumeStatus(@PathVariable final String volume) {
@@ -380,17 +335,7 @@ public class BlockService {
 		return "{\"status\":0,\"progress\":\"" + status + "\"}";
 	}
 	
-	/////////////////////////////////////////////////////////////////////
-	/////////////////////////////snapshot///////////////////////////////
-	///////////////////////////////////////////////////////////////////
-	/**
-	 * 创建快照
-	 * 
-	 * @param snapshot
-	 * @param pool
-	 * @return
-	 * @throws IOException 
-	 */
+	
 	@RequestMapping(method = RequestMethod.POST, value = "/snapshot/create")
 	@ResponseBody
 	public String createSnapshot(@RequestParam String poolvolume,
@@ -408,14 +353,7 @@ public class BlockService {
 		return objectMapper.writeValueAsString(map);
 	}
 	
-	/**
-	 * 删除快照
-	 * 
-	 * @param pool
-	 * @param snapshot
-	 * @return
-	 * @throws IOException 
-	 */
+	
 	@RequestMapping(method = RequestMethod.POST, value = "/snapshot/delete")
 	@ResponseBody
 	public String deleteSnapshot(@RequestParam String poolvolsnapshot) throws IOException {
@@ -432,13 +370,7 @@ public class BlockService {
 		return objectMapper.writeValueAsString(map);
 	}
 	
-	/**
-	 * 显示快照信息，snapshot未指明显示全部快照信息
-	 * 
-	 * @param snapshot pool/vol@snapshot
-	 * @return
-	 * @throws IOException 
-	 */
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/snapshot/list")
 	@ResponseBody
 	public String listSnapshot(@RequestParam(required = false) String poolvolumesnap) throws IOException {
@@ -486,15 +418,7 @@ public class BlockService {
 		return objectMapper.writeValueAsString(snapMap);
 	}
 	
-	/**
-	 * 快照中生成新卷，卷大小，必须不小于快照大小
-	 * 
-	 * @param pool
-	 * @param volume
-	 * @param size
-	 * @return
-	 * @throws IOException 
-	 */
+	
 	@RequestMapping(method = RequestMethod.POST, value = "/snapshot/generate")
 	@ResponseBody
 	public String generateVolume(@RequestParam String poolvolumesnapshot,
@@ -512,20 +436,7 @@ public class BlockService {
 		return objectMapper.writeValueAsString(map);
 	}
 	
-	/////////////////////////////////////////////////////////////////////
-	/////////////////////////export/disexport///////////////////////////
-	///////////////////////////////////////////////////////////////////
-	/**
-	 * 导出iscis
-	 * 
-	 * @param iqn
-	 * @param initiator
-	 * @param chap
-	 * @param volume
-	 * @param ip
-	 * @return
-	 * @throws IOException 
-	 */
+
 	@RequestMapping(method = RequestMethod.POST, value = "/export")
 	@ResponseBody
 	public String export(@RequestParam String iqn,
@@ -590,13 +501,7 @@ public class BlockService {
 		return respExist;
 	}
 	
-	/**
-	 * 取消导出
-	 * 
-	 * @param poolvolume
-	 * @return
-	 * @throws IOException
-	 */
+
 	@RequestMapping(method = RequestMethod.POST, value = "/export/disable")
 	@ResponseBody
 	public String disExport(@RequestParam String poolvolume) throws IOException {
@@ -647,17 +552,7 @@ public class BlockService {
 		return objectMapper.writeValueAsString(map);
 	}
 	
-	/**
-	 * 检查导出信息
-	 * 
-	 * @param iqn
-	 * @param initiator
-	 * @param user
-	 * @param pw
-	 * @param volume
-	 * @return
-	 * @throws IOException
-	 */
+	
 	@RequestMapping(method = RequestMethod.POST, value = "/export/check")
 	@ResponseBody
 	public String checkExport(@RequestParam String iqn,

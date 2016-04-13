@@ -17,47 +17,9 @@
 			data-toggle="dropdown" data-target="#user-menu"
 			class="dropdown-toggle"><i class="icon icon-user"></i> <span
 				class="text">User profile </span><b class="caret"></b></a>
-			<!--<ul class="dropdown-menu">
-				 <li><a href="javascript:showGlobleProperties()"><i
-						class="icon icon-cog"></i> 全局存储配置</a></li>
-				<li class="divider"></li>
-				<li><a href="javascript:showNodeProperties()"><i
-						class="icon icon-sitemap"></i> 存储节点配置</a></li>
-				<li class="divider"></li>
-				<li><a href="javascript:showListVolumeProperties()"><i
-						class="icon icon-inbox"></i> 存储卷配置</a></li>
-				<li class="divider"></li>
-				<li><a href="javascript:showMountPoint()"><i
-						class="icon-folder-close"></i> 存储挂载点配置</a></li>
-				<li class="divider"></li>
-				<li><a href="javascript:showUsers()"><i
-						class="icon-user-md"></i> 存储用户配置</a></li>
-				<li class="divider"></li> -->
-				<!-- <li><a href="javascript:showDisk()"><i class="icon-hdd"></i>
-						磁盘监控管理</a></li>
-				<li class="divider"></li>
-				<li><a href="javascript:showDiskLog()"><i class="icon-book"></i>
-						磁盘日志管理</a></li>
-				<li class="divider"></li>
-				<li><a href="javascript:showCluster()"><i class="icon-sitemap"></i>
-						集群监控管理</a></li>
-			</ul> -->
-		</li>
-		<%-- <li class="dropdown" id="data-center"><a title="" href="#"
-			data-toggle="dropdown" data-target="#data-center"
-			class="dropdown-toggle"><i class="icon icon-cloud"></i> <span
-				class="text">${dataCenterName} [更换]</span><b class="caret"></b></a>
 			
-			<ul class="dropdown-menu">
-				<c:forEach items="${dataCenterMap}" var="item" varStatus="data" >
-					<li><a href='javascript:switchDataCenter("${item.key}")'><i
-						class="icon icon-cloud"></i> ${item.value}</a></li>
-					<c:if test="${!data.last}">
-						<li class="divider"></li>
-					</c:if>
-				</c:forEach>
-			</ul>
-		</li> --%>
+		</li>
+		
 				
 		<li class=""><a title="" href="javascript:logout()"><i
 				class="icon icon-share-alt"></i> <span class="text">Exit</span></a></li>

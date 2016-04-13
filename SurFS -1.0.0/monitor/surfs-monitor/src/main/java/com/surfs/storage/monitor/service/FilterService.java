@@ -18,12 +18,7 @@ public class FilterService {
 	
 	private List<Filter> listFilter = new ArrayList<>();
 
-	/**
-	 * 
-	 * @param line 需要过滤的字符串
-	 * @param filterArgs 过滤参数，第一个为日期，第二个为字符串可以过滤多个字符串，例如"a,b"
-	 * @return
-	 */
+	
 	public boolean filterLog(String line, String... filterArgs) {
 		for (int i = 0; i < filterArgs.length; i++) {
 			if (!listFilter.get(i).isFilter(line, filterArgs[i]))
