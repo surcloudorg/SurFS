@@ -31,9 +31,7 @@ public class NasFileTest {
     static String wfilename = "E:\\Micros Windows XP\\XP_64bit.iso";
     static String dfilename = "d:\\XP_64bit.iso";
 
-    /**
-     * 基本接口测试
-     */
+
     private static void baseTest() throws Exception {
 
         SurFile sf = SurFileFactory.newInstance("/testdir/testsubdir", "uspod1/uscluster1");

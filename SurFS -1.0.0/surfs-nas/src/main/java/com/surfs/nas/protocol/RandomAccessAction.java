@@ -52,7 +52,6 @@ public class RandomAccessAction {
     }
 
     /**
-     * 打开文件
      *
      * @throws VolumeBusyException
      * @throws IOException
@@ -60,7 +59,7 @@ public class RandomAccessAction {
     private void initOp() throws VolumeBusyException, IOException {
         synchronized (this) {
             activeTime = System.currentTimeMillis();
-            if (randomAccessFile == null) {//打开文件
+            if (randomAccessFile == null) {
                 this.meta = StorageSources.getServiceStoragePool().getDatasource().getNasMetaAccessor().queryNasMeta(getParentId(), getFileId());
                 if (meta == null) {
                      

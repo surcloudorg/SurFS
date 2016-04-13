@@ -116,9 +116,6 @@ public final class Node {
         }
     }
 
-    /**
-     * 关闭线程
-     */
     public void destroy() {
         tcpclient.destory();
         if (testSpeedHandler != null) {

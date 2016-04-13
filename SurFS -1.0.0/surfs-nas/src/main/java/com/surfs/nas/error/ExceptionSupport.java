@@ -13,7 +13,6 @@ import java.net.ConnectException;
 public class ExceptionSupport {
 
     /**
-     * 应该返回给客户的错误码
      *
      * @return
      */
@@ -22,7 +21,6 @@ public class ExceptionSupport {
     }
 
     /**
-     * 应该返回给客户的错误码
      *
      * @param e
      * @return
@@ -68,9 +66,9 @@ public class ExceptionSupport {
 
     public static IOException getException(ErrorResponse tcpResponse) {
         switch (tcpResponse.getErrorCode()) {
-            case 50099://未知错误
+            case 50099:
                 return new IOException(tcpResponse.getErrorMessage());
-            case 50000://未知错误
+            case 50000:
                 return new IOException(tcpResponse.getErrorMessage());
             case 50080:
                 return new NosqlException(tcpResponse.getErrorMessage());

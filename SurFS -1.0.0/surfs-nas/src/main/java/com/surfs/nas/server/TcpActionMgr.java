@@ -42,7 +42,7 @@ public class TcpActionMgr extends Thread {
         for (Map<Long, RandomAccessAction> map : col) {
             List<RandomAccessAction> actions = new ArrayList<>(map.values());
             for (RandomAccessAction action : actions) {
-                if (vol.getVolumeProperties().getVolumeID().equals(action.getMeta().getVolumeId())) {//下线
+                if (vol.getVolumeProperties().getVolumeID().equals(action.getMeta().getVolumeId())) {
                     action.close();
                 }
             }
@@ -54,7 +54,7 @@ public class TcpActionMgr extends Thread {
         for (Map<Long, RandomAccessAction> map : col) {
             List<RandomAccessAction> actions = new ArrayList<>(map.values());
             for (RandomAccessAction action : actions) {
-                if (action.isSessionTimeout()) {//过期
+                if (action.isSessionTimeout()) {
                     action.close();
                 }
             }

@@ -30,7 +30,6 @@ public class TestSpeedHandler extends ReusableThread {
     }
 
     /**
-     * 链路测试
      *
      * @throws IOException
      */

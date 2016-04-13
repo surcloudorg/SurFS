@@ -38,7 +38,6 @@ public class AsychQuotaUpdater implements Callable {
     }
 
     /**
-     * 开始执行
      *
      */
     public void start() {

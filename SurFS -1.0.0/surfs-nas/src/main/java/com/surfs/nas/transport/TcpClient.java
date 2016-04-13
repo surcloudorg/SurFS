@@ -83,9 +83,7 @@ public class TcpClient extends Thread {
         return status == 2;
     }
 
-    /**
-     * 摧毁
-     */
+
     public void destory() {
         synchronized (this) {
             status = 2;

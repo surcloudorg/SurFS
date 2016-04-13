@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <build>
-        <!-- 非eclipse ide 忽略<pluginManagement>下org.eclipse.m2e插件 -->
+      
         <pluginManagement>
             <plugins>
                 <plugin>

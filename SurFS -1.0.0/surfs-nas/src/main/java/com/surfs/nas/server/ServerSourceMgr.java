@@ -36,7 +36,7 @@ public class ServerSourceMgr extends ResourcesManager {
     static {
         try {
             String aLocalip = System.getProperty(TcpServer.class.getName() + ".Host");
-            if (aLocalip != null && (!aLocalip.trim().isEmpty())) {//优先使用IP
+            if (aLocalip != null && (!aLocalip.trim().isEmpty())) {
                 localHostName = aLocalip.trim();
                 
             } else {
@@ -89,15 +89,15 @@ public class ServerSourceMgr extends ResourcesManager {
         versionUpdater = new ReusableThread(15000, "versionUpdater") {
             @Override
             public void doTask() throws IOException {
-                ResourcesAccessor configDataAccessor = datasource.getResourcesAccessor();//加载全局参数
+                ResourcesAccessor configDataAccessor = datasource.getResourcesAccessor();
                 configDataAccessor.updateClientSourceVersion();
             }
         };
         register();
         volumeScaner = new VolumeScaner(this);
-        getVolumeScaner().doTask();//初始化卷
+        getVolumeScaner().doTask();
         selector = new VolumeSelectorDynamic(this);
-        Collection<Volume> col = getVolumeMap().values();//启动卷
+        Collection<Volume> col = getVolumeMap().values();
         for (Volume vol : col) {
             vol.init();
         }
@@ -153,7 +153,7 @@ public class ServerSourceMgr extends ResourcesManager {
         ResourcesAccessor configDataAccessor = datasource.getResourcesAccessor();
         NodeProperties oldnode = configDataAccessor.getNodeProperties(getLocalHostName());
         if (node.getBackupList() == null ? oldnode.getBackupList() == null
-                : node.getBackupList().equals(oldnode.getBackupList())) {//没做改动，不更新
+                : node.getBackupList().equals(oldnode.getBackupList())) {
             return;
         }
         node.setPort(getLocalPort());

@@ -13,7 +13,7 @@ import java.io.IOException;
 public class ReadResponse extends TcpResponse {
 
     private String randomName = null;
-    private String volumeId = null; //存储在物理存储介质的设备ID
+    private String volumeId = null; 
     private byte[] content;
     private int pos;
     private int len;

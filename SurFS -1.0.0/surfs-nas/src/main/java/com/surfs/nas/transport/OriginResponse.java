@@ -84,7 +84,6 @@ public class OriginResponse extends TcpResponse {
     }
 
     /**
-     * 设置实例
      *
      * @param <T>
      * @param objects
@@ -97,7 +96,6 @@ public class OriginResponse extends TcpResponse {
     }
 
     /**
-     * 获取对象
      *
      * @param <T>
      * @param type
@@ -124,7 +122,6 @@ public class OriginResponse extends TcpResponse {
     }
 
     /**
-     * 设置实例
      *
      * @param <T>
      * @param objects
