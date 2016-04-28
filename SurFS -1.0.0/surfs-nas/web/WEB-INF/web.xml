@@ -1,4 +1,4 @@
-<!DOCTYPE web-app PUBLIC
+﻿<!DOCTYPE web-app PUBLIC
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
@@ -77,7 +77,6 @@
 	
     <!-- surfs config start -->
     <servlet>
-        <description>WebServices框架服务控制器，请不要修该删除</description>
         <servlet-name>SoapServlet</servlet-name>
         <servlet-class>com.autumn.core.web.SoapServlet</servlet-class>
     </servlet>
