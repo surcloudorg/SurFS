@@ -43,14 +43,10 @@
 			
 			<li><a href="javascript:showDisk()"><i
 					class="icon-hdd"></i> <span>Disk monitor management</span></a></li>
-			<!-- <li><a href="javascript:showDiskLog()"><i
-					class="icon-book"></i> <span>磁盘日志管理</span></a></li> -->
-			<!-- <li><a href="javascript:showCluster()"><i
-					class="icon-sitemap"></i> <span>集群监控管理</span></a></li> -->
+			
 			<li class="active"><a href="javascript:showPoolUsedDisks()"><i
 					class="icon-hdd"></i> <span>Node management</span></a></li>
-			<!-- <li><a href="javascript:showTarget()"><i
-					class="icon-user-md"></i> <span>Target管理</span></a></li> -->
+			
 		</ul>
 	</div>
 	<!--close-left-menu-stats-sidebar-->
@@ -69,13 +65,13 @@
 			<div id="pool_success" class="alert alert-success alert-block"
 				style="display: none;">
 				<a class="close" data-dismiss="alert" href="#">×</a>
-				<h4 class="alert-heading">操作成功!</h4>
+				<h4 class="alert-heading">SUCCESS!</h4>
 				<span></span>
 			</div>
 			<div id="pool_error" class="alert alert-error alert-block"
 				style="display: none;">
 				<a class="close" data-dismiss="alert" href="#">×</a>
-				<h4 class="alert-heading">操作失败!</h4>
+				<h4 class="alert-heading">FAILUER!</h4>
 				<span></span>
 			</div>
 			<hr>
@@ -132,79 +128,9 @@
 		</div>
 	</div>
 
-	<!-- pop-up dialogs start -->
-	<div id="deleteAlert" class="modal hide fade">
-		<div class="modal-header">
-			<button data-dismiss="modal" class="close" type="button">×</button>
-			<h3>
-				<span class="icon"><i class="icon-align-justify"></i></span> 删除确认
-			</h3>
-		</div>
-		<div class="modal-body">
-			<p>确定继续执行删除操作吗？</p>
-			<input type="hidden" id="zpoolvolHidden"> <input
-				type="hidden" id="ipHidden"> <input type="hidden"
-				id="trHidden">
-		</div>
-		<div class="modal-footer">
-			<a data-dismiss="modal" class="btn btn-success" href="#"
-				onclick="confirmDeleteVol('${path}')"><i class="icon icon-save"></i>
-				确定</a> <a data-dismiss="modal" class="btn" href="#"><i
-				class="icon icon-undo"></i> 取消</a>
-		</div>
-	</div>
-	<!-- pop-up dialogs end -->
 
-	<!-- 添加卷弹窗 start -->
-	<div id="addAlert" class="modal hide fade">
-		<div class="modal-header">
-			<button data-dismiss="modal" class="close" type="button">×</button>
-			<h3>
-				<span class="icon"><i class="icon-align-justify"></i></span> 添加新卷
-			</h3>
-		</div>
 
-		<div class="modal-body">
-			<div class="widget-box">
-				<div class="widget-content nopadding">
-					<form action="#" method="get" class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label">zpool名称 :</label>
-							<div class="controls">
-								<input type="text" class="span2" id="add_zpool" name="zpool"
-									readonly="readonly" />
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">卷名称 :</label>
-							<div class="controls">
-								<input type="text" class="span2" id="add_vol" name="vol"
-									placeholder="不能包含字符  /" /> <span id="add_vol_error"
-									class="help-inline" style="font-size: small; color: red;"></span>
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label">空间( GB ) :</label>
-							<div class="controls">
-								<input type="text" class="span2" id="add_quota" name="quota"
-									placeholder="只允许整数" /> <span id="add_quota_error"
-									class="help-inline" style="font-size: small; color: red;"></span>
-							</div>
-						</div>
-						<input type="hidden" id="add_ip" /> <input type="hidden"
-							id="addVolHidden" />
-					</form>
-				</div>
-			</div>
-		</div>
-
-		<div class="modal-footer">
-			<a class="btn btn-success" href="#" onclick="addVol('${path}')"><i
-				class="icon icon-save"></i> 保存</a> <a data-dismiss="modal" class="btn"
-				href="#"><i class="icon icon-undo"></i> 取消</a>
-		</div>
-	</div>
-	<!-- 添加卷弹窗 end -->
+	
 
 	<%@include file="../../includes/footer.jsp"%>
 

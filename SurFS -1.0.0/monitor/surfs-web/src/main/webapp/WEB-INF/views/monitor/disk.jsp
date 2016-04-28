@@ -26,22 +26,10 @@
 	<!--start sidebar-menu-->
 	<div id="sidebar">
 		<ul>
-			<!-- <li><a href="javascript:showGlobleProperties()"><i
-					class="icon-cog"></i> <span>全局存储配置</span></a></li>
-			<li><a href="javascript:showNodeProperties()"><i
-					class="icon-sitemap"></i> <span>存储节点配置</span></a></li>
-			<li><a href="javascript:showListVolumeProperties()"><i
-					class="icon-inbox"></i> <span>存储卷配置</span></a></li>
-			<li><a href="javascript:showMountPoint()"><i
-					class="icon-folder-close"></i> <span>存储挂载点配置</span></a>
-			<li><a href="javascript:showUsers()"><i class="icon-user-md"></i>
-					<span>存储用户配置</span></a></li> -->
+		
 			<li class="active"><a href="javascript:showDisk()"><i
 					class="icon-hdd"></i> <span>Disk monitor management</span></a></li>
-			<!-- <li><a href="javascript:showDiskLog()"><i
-					class="icon-book"></i> <span>磁盘日志管理</span></a></li>
-			<li><a href="javascript:showCluster()"><i
-					class="icon-sitemap"></i> <span>集群监控管理</span></a></li> -->
+			
 			<li><a href="javascript:showPoolUsedDisks()"><i
 					class="icon-hdd"></i> <span>Node management</span></a></li>
 		</ul>
